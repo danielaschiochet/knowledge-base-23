@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMPS Knowledge Base - Factory Models & Single Workstation Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 40px; background-color: #f4f7f9; }
+        #content { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        pre { background: #f8f9fa; padding: 15px; border-radius: 5px; overflow-x: auto; border: 1px solid #e1e4e8; }
+        code { font-family: "Cascadia Code", "Courier New", monospace; color: #d73a49; }
+        h1 { color: #0056b3; border-bottom: 2px solid #eaecef; padding-bottom: 10px; }
+        h2 { color: #24292e; margin-top: 30px; border-left: 5px solid #0056b3; padding-left: 15px; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 1px solid #dfe2e5; padding: 10px; text-align: left; }
+        th { background-color: #f6f8fa; }
+    </style>
+</head>
+<body>
+
+    <div id="content">
+        Caricamento del materiale in corso...
+    </div>
+
+    <script>
+        // Funzione per leggere il file index.md e mostrarlo
+        async function loadMarkdown() {
+            try {
+                // Legge il file index.md presente nel repository
+                const response = await fetch('index.md');
+                if (!response.ok) throw new Error('Impossibile trovare index.md');
+                
+                const text = await response.text();
+                
+                // Converte il testo Markdown in HTML usando Marked.js
+                document.getElementById('content').innerHTML = marked.parse(text);
+                
+                // Opzionale: Titolo della pagina dinamico
+                console.log("Materiale caricato con successo");
+            } catch (error) {
+                document.getElementById('content').innerHTML = "Errore nel caricamento del file index.md. Assicurati che il file esista nel repository.";
+                console.error(error);
+            }
+        }
+
+        // Avvia il caricamento al caricamento della pagina
+        loadMarkdown();
+    </script>
+
+</body>
+</html>
